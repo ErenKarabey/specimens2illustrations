@@ -15,6 +15,10 @@ def xml2illustrations(input_file, output_file, image_dir, download_images = True
             elements = soup.find_all('tp:treatment-sec', attrs={'sec-type': 'Description'})
             if len(elements) == 0:
                 elements = soup.find_all('tp:treatment-sec', attrs={'sec-type': 'description'})
+            for element in elements:
+                if element.fig is None:
+                    elements.remove(element)
+                    
             #print(len(elements))
             
             with open(output_file, 'w', encoding='utf8') as f_out:
